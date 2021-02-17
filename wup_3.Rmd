@@ -1,7 +1,7 @@
 ---
 title: "Alcohol vs Seat choice"
-author: "Your Name"
-date: "Fall 2020"
+author: "Natalia Lekach"
+date: "February 17, 2021"
 output: html_document
 ---
 
@@ -14,8 +14,7 @@ require(tidyverse)
 require(tigerstats)
 davisdata <- read.csv(file="UCDavis.csv")
 ```
-## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
-## you choose to sit in??
+## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row you choose to sit in??
 
 ## Now with ggplot - first select the basic data
 
@@ -28,14 +27,21 @@ basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
 basicCN + geom_boxplot()
 ```
   
+This box plot displays that, on average, the students in the front drink less alcohol than the students in the middle and the back. It also displays that, on average, the students in the back drink more alcohol than the students in the middle. It shows that the students who drink the most alcohol, on average, sit in the back of the class.  
   
 ### get fancy  
 
 ```{r}
-basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
+basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Alcohol Consumption by Seat Location \n with 2 lines")
 ```
-
+  
+This box plot displays that, on average, the students in the front drink less alcohol than the students in the middle and the back. It also displays that, on average, the students in the back drink more alcohol than the students in the middle. It shows that the students who drink the most alcohol, on average, sit in the back of the class.    
 ## Numerical Summarys 
+```{r}
+favstats(alcohol~Seat,data=davisdata)
+```
+  
+This table shows that, on average, the students that sit in the back in the back consume more alcohol than the students in the middle and front. The students in the front, on average, drink less than the students in the middle. The students in the back, on average, consume more than double the amount of alcohol than the students in the front.  
 
 ## Inferential Tests
 
