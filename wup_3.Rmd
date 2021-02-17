@@ -35,8 +35,10 @@ This box plot displays that, on average, the students in the front drink less al
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Alcohol Consumption by Seat Location \n with 2 lines")
 ```
   
-This box plot displays that, on average, the students in the front drink less alcohol than the students in the middle and the back. It also displays that, on average, the students in the back drink more alcohol than the students in the middle. It shows that the students who drink the most alcohol, on average, sit in the back of the class.    
+This box plot displays that, on average, the students in the front drink less alcohol than the students in the middle and the back. It also displays that, on average, the students in the back drink more alcohol than the students in the middle. It shows that the students who drink the most alcohol, on average, sit in the back of the class.
+  
 ## Numerical Summarys 
+
 ```{r}
 favstats(alcohol~Seat,data=davisdata)
 ```
@@ -45,6 +47,22 @@ This table shows that, on average, the students that sit in the back in the back
 
 ## Inferential Tests
 
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+
+A small p-value of 0.000116 indicates that we reject the null hypothesis. It is unlikely that alcohol consumption in all three seat locations is the same. There is a significant difference between at least two of the seat locations and their amount of alcohol consumption. We must complete an additional test.
+
+### Tukey HSD Plot  
+
+```{r}
+plot(TukeyHSD(model1))
+```
+  
+This Tukey HSD plot shows that there is a statistically significant difference in average alcohol consumption between people who sit in the front and people who sit in the back and between people who sit in the middle and people who sit in the back. It shows that there is no significant difference in average alcohol consumption between the students who sit in the middle and the front.   
+  
 ## Conclusions
 
+For this problem, we asked, is there a difference in alcohol consumption based on where people sit. The evidence shows that the individuals who consume more alcohol, on average, sit in the back of the class. The One Way ANOVA and the subsequent Tukey HSD plot present this evidence. 
 
